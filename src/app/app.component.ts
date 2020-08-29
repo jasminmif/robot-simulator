@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RobotService, Direction, gridHeight, gridWith } from './robot.service';
+import { RobotService, Direction } from './services/robot.service';
 import { Observable } from 'rxjs';
+import { NotificationService } from './shared/services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -9,38 +10,48 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   public isGameStarted: Observable<boolean>;
-  public xPosition: Observable<number>;
-  public yPosition: Observable<number>;
-  public direction: Observable<Direction>;
 
-  public gridRows = Array.from({ length: gridHeight }, (_v, k) => (gridHeight - 1 ) - k);
-  public gridCols = Array.from({ length: gridWith }, (_v, k) => k);
+  constructor(
+    private robotService: RobotService,
+    private notificationService: NotificationService
+  ) {}
 
-  constructor(private robotService: RobotService) {}
-
-  ngOnInit() {
-    this.xPosition = this.robotService.getXPosition();
-    this.yPosition = this.robotService.getYPosition();
-    this.direction = this.robotService.getDirection();
+  ngOnInit(): void {
+    this.isGameStarted = this.robotService.getIsStartedGame();
   }
-
-  gridTrackFn = (index: number) => index;
 
   public placeRobotInput: string;
   public placeRobot() {
     const [x, y, direction] = this.placeRobotInput.trim().split(',');
-    this.robotService.place(Number(x), Number(y), Direction[direction]);
+
+    try {
+      this.robotService.place(Number(x), Number(y), Direction[direction]);
+    } catch({message}) {
+      this.notificationService.show(message);
+    }
   }
 
   public rotateLeft() {
     try {
       this.robotService.rotateLeft();
-    } catch (e) {
-      console.log(e.message);
+    } catch ({ message }) {
+      this.notificationService.show(message);
+    }
+  }
+
+  public rotateRight() {
+    try {
+      this.robotService.rotateRight();
+    } catch ({ message }) {
+      this.notificationService.show(message);
     }
   }
 
   public move() {
-    this.robotService.move();
+    try {
+      this.robotService.move();
+    } catch ({ message }) {
+      this.notificationService.show(message);
+    }
   }
 }

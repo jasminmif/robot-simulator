@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  <app-notification></app-notification>
   <div class="w-screen h-screen flex justify-center bg-blue-200">
     <div class="flex-1 shadow-lg my-10 mx-32 rounded bg-gray-100 p-3">
       <div class="flex flex-col">
@@ -18,7 +19,7 @@
         <app-divider></app-divider>
 
         <div class="flex flex-row uppercase mb-1 text-xs">
-          Available Commands: x: {{ xPosition | async }} | y: {{ yPosition | async }} | dir: {{ direction | async}}
+          Available Commands:
         </div>
 
         <div class="flex items-center">
@@ -44,7 +45,7 @@
               </svg>
             </app-button>
 
-            <app-button>
+            <app-button (onClick)="rotateRight()">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="text-blue-700">
                 <path
@@ -62,18 +63,7 @@
       <app-divider></app-divider>
 
       <div>
-        <div class="grid grid-flow-row grid-cols-5 grid-rows-1 gap-4" *ngFor="let col of gridRows; trackBy: gridTrackFn">
-            <div *ngFor="let row of gridCols; trackBy: gridTrackFn">
-              {{ (xPosition | async ) == row && (yPosition | async ) == col
-                ? 'robot' : ''
-              }}
-              {{ (direction | async) == 3 ? 'V' : ''  }}
-              {{ (direction | async) == 1 ? '^' : ''  }}
-              {{ (direction | async) == 2 ? '>' : ''  }}
-              {{ (direction | async) == 4 ? '<' : ''  }}
-              x: {{row }}  y:{{ col }}
-            </div>
-        </div>
+        <app-grid></app-grid>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 export enum Direction {
   N = 1,
@@ -16,8 +16,8 @@ export const gridWith = 5;
 })
 export class RobotService {
   private isStartedGame = new BehaviorSubject<boolean>(false);
-  private xPosition = new BehaviorSubject<number>(0);
-  private yPosition = new BehaviorSubject<number>(0);
+  private xPosition = new BehaviorSubject<number | null>(null);
+  private yPosition = new BehaviorSubject<number | null>(null);
   private direction = new BehaviorSubject<Direction>(Direction.N);
 
   public place(x: number, y: number, direction: Direction = Direction.N): void {
@@ -79,7 +79,6 @@ export class RobotService {
         ? Direction.W
         : Direction[Direction[this.direction.value - 1]];
 
-    console.log(nextDirection);
     this.setDirection(nextDirection);
   }
 
