@@ -8,9 +8,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  public isGameStarted: Observable<boolean>;
   public xPosition: Observable<number>;
   public yPosition: Observable<number>;
   public direction: Observable<Direction>;
+  public grid = Array.from({ length: 5 }, (v, k) => k);
 
   constructor(private robotService: RobotService) {}
 
@@ -22,12 +24,17 @@ export class AppComponent implements OnInit {
 
   gridTrackFn = (index: number) => index;
 
-  public placeRobotInput;
-  placeRobot() {
-    
+  public placeRobotInput: string;
+  public placeRobot() {
+    const [x, y, direction] = this.placeRobotInput.trim().split(',');
+    this.robotService.place(Number(x), Number(y), Direction[direction]);
   }
 
-  rotateLeft() {
-    this.robotService.rotateLeft();
+  public rotateLeft() {
+    try {
+      this.robotService.rotateLeft();
+    } catch (e) {
+      console.log(e.message);
+    }
   }
 }

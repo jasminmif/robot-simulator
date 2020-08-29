@@ -1,3 +1,7 @@
-<button class="py-1 px-6 bg-blue-300 border-blue-500 border rounded-sm hover:bg-blue-400">
+<button
+  class="text-base px-4 py-1 {{ baseClasses }} {{ disabled ? disabledClasses : activeClasses }} border rounded-sm shadow-sm leading-6 transition ease-in-out duration-150 focus:outline-none"
+  [disabled]="disabled"
+  (click)="onBtnClick()"
+>
   <ng-content></ng-content>
 </button>
