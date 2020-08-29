@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RobotService, Direction } from './robot.service';
+import { RobotService, Direction, gridHeight, gridWith } from './robot.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,7 +12,9 @@ export class AppComponent implements OnInit {
   public xPosition: Observable<number>;
   public yPosition: Observable<number>;
   public direction: Observable<Direction>;
-  public grid = Array.from({ length: 5 }, (v, k) => k);
+
+  public gridRows = Array.from({ length: gridHeight }, (_v, k) => (gridHeight - 1 ) - k);
+  public gridCols = Array.from({ length: gridWith }, (_v, k) => k);
 
   constructor(private robotService: RobotService) {}
 
@@ -36,5 +38,9 @@ export class AppComponent implements OnInit {
     } catch (e) {
       console.log(e.message);
     }
+  }
+
+  public move() {
+    this.robotService.move();
   }
 }

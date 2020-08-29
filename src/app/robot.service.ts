@@ -21,6 +21,14 @@ export class RobotService {
   private direction = new BehaviorSubject<Direction>(Direction.N);
 
   public place(x: number, y: number, direction: Direction = Direction.N): void {
+    if (x >= gridWith || y >= gridHeight) {
+      throw new Error(`X should be less than ${gridWith} and Y should be less than ${gridHeight}`)
+    }
+
+    if (x < 0 || y < 0) {
+      throw new Error('X or Y should be greater than 0');
+    }
+
     this.setGameAsStarted();
 
     this.setXPosition(x);
@@ -75,39 +83,44 @@ export class RobotService {
     this.setDirection(nextDirection);
   }
 
+  private getErrorMoveMsg(direction) {
+    return `Cant move any further ${direction}`;
+  }
+
   public move() {
     this.throwIfGameNotStarted();
 
     const currentDirection = this.direction.value;
-    const verticalPos = this.yPosition.value;
-    const horizontalPos = this.xPosition.value;
+    const yPosition = this.yPosition.value;
+    const xPosition = this.xPosition.value;
 
     if (currentDirection === Direction.N) {
-      if (verticalPos === 0) {
-        throw new Error('Cant move any further North');
+      if (yPosition === gridHeight - 1) {
+        throw new Error(this.getErrorMoveMsg('North'));
       }
-      this.setYPosition(verticalPos - 1);
+      this.setYPosition(yPosition + 1);
     }
 
     if (currentDirection === Direction.S) {
-      if (verticalPos === gridHeight - 1) {
-        throw new Error('Cant move any further North');
+      if (yPosition === 0) {
+        throw new Error(this.getErrorMoveMsg('South'));
       }
-      this.setYPosition(verticalPos + 1);
+      this.setYPosition(yPosition - 1);
     }
 
     if (currentDirection === Direction.W) {
-      if (horizontalPos === 0) {
-        throw new Error('Cant move any further West');
+      if (xPosition === 0) {
+        throw new Error(this.getErrorMoveMsg('West'));
       }
 
-      this.setXPosition(horizontalPos - 1);
+      this.setXPosition(xPosition - 1);
     }
 
     if (currentDirection === Direction.E) {
-      if (horizontalPos === gridWith - 1) {
-        this.setXPosition(horizontalPos + 1);
+      if (xPosition === gridWith - 1) {
+        throw new Error(this.getErrorMoveMsg('East'));
       }
+      this.setXPosition(xPosition + 1);
     }
   }
 
@@ -120,7 +133,7 @@ export class RobotService {
   }
 
   private throwIfGameNotStarted() {
-    if (this.isStartedGame.value == false) {
+    if (!this.isStartedGame.value) {
       throw new Error(
         'Place the robot first than use the rest of the commands.'
       );
