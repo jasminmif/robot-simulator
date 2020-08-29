@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
     try {
       this.robotService.place(Number(x), Number(y), Direction[direction]);
-    } catch({message}) {
+    } catch ({ message }) {
       this.notificationService.show(message);
     }
   }
@@ -50,6 +50,15 @@ export class AppComponent implements OnInit {
   public move() {
     try {
       this.robotService.move();
+    } catch ({ message }) {
+      this.notificationService.show(message);
+    }
+  }
+
+  public reportCurrentPosition() {
+    try {
+      const currentPositionMsg = this.robotService.getCurrentPosition();
+      this.notificationService.show(currentPositionMsg);
     } catch ({ message }) {
       this.notificationService.show(message);
     }

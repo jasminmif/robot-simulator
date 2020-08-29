@@ -33,7 +33,7 @@
 
         <div class="flex flex-row">
           <div class="flex-1">
-            <app-button (onClick)="move()" >Move Robot</app-button>
+            <app-button (onClick)="move()">Move Robot</app-button>
           </div>
           <div class="flex-1 text-center">
             <app-button (onClick)="rotateLeft()">
@@ -55,7 +55,7 @@
             </app-button>
           </div>
           <div class="flex-1 text-right">
-            <app-button color="red">Report current position</app-button>
+            <app-button color="red" (onClick)="reportCurrentPosition()">Report current position</app-button>
           </div>
         </div>
       </div>

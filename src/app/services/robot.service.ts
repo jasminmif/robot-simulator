@@ -138,4 +138,10 @@ export class RobotService {
       );
     }
   }
+
+  public getCurrentPosition() {
+    this.throwIfGameNotStarted();
+
+    return `X: ${this.xPosition.value} | Y: ${this.yPosition.value} | Direction: ${Direction[this.direction.value]}`
+  }
 }
