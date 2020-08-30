@@ -9,7 +9,7 @@ import { NotificationService } from './shared/services/notification.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public isGameStarted: Observable<boolean>;
+  public isGameStarted$: Observable<boolean>;
 
   constructor(
     private robotService: RobotService,
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isGameStarted = this.robotService.getIsStartedGame();
+    this.isGameStarted$ = this.robotService.getIsStartedGame();
   }
 
   public placeRobotInput: string;

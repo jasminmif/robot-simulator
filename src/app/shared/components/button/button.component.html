@@ -1,5 +1,6 @@
 <button
   class="text-base px-4 py-1 {{ baseClasses }} {{ disabled ? disabledClasses : activeClasses }} border rounded-sm shadow-sm leading-6 transition ease-in-out duration-150 focus:outline-none"
+  id="{{ id }}"
   [disabled]="disabled"
   (click)="onBtnClick()"
 >

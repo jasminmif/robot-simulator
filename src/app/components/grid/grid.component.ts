@@ -8,9 +8,9 @@ import { Direction, RobotService, gridHeight, gridWith } from 'src/app/services/
   styleUrls: ['./grid.component.scss']
 })
 export class GridComponent implements OnInit {
-  public xPosition: Observable<number>;
-  public yPosition: Observable<number>;
-  public direction: Observable<Direction>;
+  public xPosition$: Observable<number>;
+  public yPosition$: Observable<number>;
+  public direction$: Observable<Direction>;
 
   // Create and fill the array with values starting from 0 till the selected Height & Width.
   public gridRows = Array.from({ length: gridHeight }, (_v, k) => (gridHeight - 1 ) - k);
@@ -19,9 +19,9 @@ export class GridComponent implements OnInit {
   constructor(private robotService: RobotService) { }
 
   ngOnInit(): void {
-    this.xPosition = this.robotService.getXPosition();
-    this.yPosition = this.robotService.getYPosition();
-    this.direction = this.robotService.getDirection();
+    this.xPosition$ = this.robotService.getXPosition();
+    this.yPosition$ = this.robotService.getYPosition();
+    this.direction$ = this.robotService.getDirection();
   }
 
   public gridTrackFn = (index: number) => index;

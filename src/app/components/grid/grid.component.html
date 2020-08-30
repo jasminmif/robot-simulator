@@ -3,8 +3,9 @@
 >
   <div *ngFor="let row of gridCols; trackBy: gridTrackFn">
     <app-cell
-      [isRobot]="(xPosition | async ) == row && (yPosition | async ) == col"
-      [direction]="direction | async"
+      [isRobot]="(xPosition$ | async ) == row && (yPosition$ | async ) == col"
+      [direction]="direction$ | async"
+      id="x{{row}}-y{{col}}"
     ></app-cell>
   </div>
 </div>

@@ -9,6 +9,7 @@ import { Direction } from 'src/app/services/robot.service';
 export class CellComponent implements OnChanges {
   @Input() isRobot: boolean = false;
   @Input() direction: Direction;
+  @Input() id: string = '';
 
   public rotationDirectionClass = '';
 

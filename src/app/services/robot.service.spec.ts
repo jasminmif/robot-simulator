@@ -22,16 +22,18 @@ describe('Initialization of Robot', () => {
     robotService = TestBed.inject(RobotService);
   });
 
-  it('If we place the robot anywhere the game should be started', () => {
+  it('If we place the robot anywhere the game should be started', (done) => {
     robotService.place(1, 1);
     robotService.getIsStartedGame().subscribe((isStartedGame) => {
       expect(isStartedGame).toBeTrue();
+      done();
     });
   });
 
-  it('The game should be not started if we have not placed the robot', () => {
+  it('The game should be not started if we have not placed the robot', (done) => {
     robotService.getIsStartedGame().subscribe((isStartedGame) => {
       expect(isStartedGame).toBeFalse();
+      done();
     });
   });
 });

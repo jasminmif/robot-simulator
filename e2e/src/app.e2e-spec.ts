@@ -1,17 +1,40 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('Robot Simulator', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
+    page.navigateTo();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('robot-simulator app is running!');
+  const placeRobotToPosition = (x: number, y:number, direction: string) => {
+    page.enterPlaceRobotInput(`${x},${y},${direction}`);
+    page.clickPlaceRobotBtn();
+  }
+
+  it('should display app name', () => {
+    expect(page.getAppName()).toEqual('Robot Simulator');
   });
+
+  it('should fill place _input_ and click place robot button', async () => {
+    const xPos = 0;
+    const yPos = 0;
+    placeRobotToPosition(xPos, yPos, 'N');
+
+    // expect(await page.getRobotYPos())
+    browser.sleep(5000);
+  })
+
+  it('should fill place _input_ and click place robot button', async () => {
+    const xPos = 0;
+    const yPos = 0;
+    placeRobotToPosition(xPos, yPos, 'N');
+
+    // expect(await page.getRobotYPos())
+    browser.sleep(5000);
+  })
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
