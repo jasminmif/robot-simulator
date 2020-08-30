@@ -1,0 +1,8 @@
+<div class="flex items-center">
+  <input type="text" class="border border-gray-500 p-1 outline-none rounded-sm w-1/3"
+    id="place-robot-input"
+    placeholder="Enter starting coordinates: X,Y,Z  ex: 1,1,N" [(ngModel)]="placeRobotInput"
+  />
+
+    <app-button id="place-robot-btn" color="green" (onClick)="placeRobot()">Place Robot</app-button>
+</div>

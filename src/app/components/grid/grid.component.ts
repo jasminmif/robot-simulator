@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Direction, RobotService, gridHeight, gridWith } from 'src/app/services/robot.service';
 
+// Create and fill the array with values starting from 0 till the selected Height & Width.
+const gridRows = Array.from({ length: gridHeight }, (_v, k) => (gridHeight - 1 ) - k);
+const gridCols = Array.from({ length: gridWith }, (_v, k) => k);
+
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
@@ -12,9 +16,8 @@ export class GridComponent implements OnInit {
   public yPosition$: Observable<number>;
   public direction$: Observable<Direction>;
 
-  // Create and fill the array with values starting from 0 till the selected Height & Width.
-  public gridRows = Array.from({ length: gridHeight }, (_v, k) => (gridHeight - 1 ) - k);
-  public gridCols = Array.from({ length: gridWith }, (_v, k) => k);
+  public gridRows = gridRows;
+  public gridCols = gridCols;
 
   constructor(private robotService: RobotService) { }
 
