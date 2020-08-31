@@ -7,13 +7,13 @@ import { BehaviorSubject } from 'rxjs';
 export class NotificationService {
   private isVisible = new BehaviorSubject<boolean>(false);
   private message = new BehaviorSubject<string | null>('');
-  private notificationDuration: number = 5000; // 5 Secs
+  private notDurationInMilliseconds: number = 5000; // 5 Secs
 
   public show(message: string) {
     this.setMessage(message);
-    this.toggleVisibleNotification()
+    this.toggleVisibleNotification();
 
-    // this.autoHideNotificationAfterSecs();
+    this.autoHideNotificationAfterSecs();
   }
 
   public hide() {
@@ -40,6 +40,6 @@ export class NotificationService {
   private autoHideNotificationAfterSecs() {
     setTimeout(() => {
       this.hide();
-    }, this.notificationDuration)
+    }, this.notDurationInMilliseconds);
   }
 }
