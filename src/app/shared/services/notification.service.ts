@@ -17,7 +17,7 @@ export class NotificationService {
   }
 
   public hide() {
-    this.toggleVisibleNotification();
+    this.isVisible.next(false);
     this.setMessage('');
   }
 
