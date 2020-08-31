@@ -14,7 +14,7 @@ describe('Robot Simulator', () => {
     page.clickPlaceRobotBtn();
   }
 
-  it('should display app name', () => {
+  it('should display robot simulator text', () => {
     expect(page.getAppName()).toEqual('Robot Simulator');
   });
 
@@ -22,18 +22,6 @@ describe('Robot Simulator', () => {
     const xPos = 0;
     const yPos = 0;
     placeRobotToPosition(xPos, yPos, 'N');
-
-    // expect(await page.getRobotYPos())
-    browser.sleep(5000);
-  })
-
-  it('should fill place _input_ and click place robot button', async () => {
-    const xPos = 0;
-    const yPos = 0;
-    placeRobotToPosition(xPos, yPos, 'N');
-
-    // expect(await page.getRobotYPos())
-    browser.sleep(5000);
   })
 
   afterEach(async () => {

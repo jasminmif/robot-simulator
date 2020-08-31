@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommandsWrapperComponent } from './commands-wrapper.component';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 
 describe('CommandsWrapperComponent', () => {
   let component: CommandsWrapperComponent;
@@ -8,7 +9,7 @@ describe('CommandsWrapperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CommandsWrapperComponent ]
+      declarations: [ CommandsWrapperComponent, ButtonComponent ]
     })
     .compileComponents();
   }));

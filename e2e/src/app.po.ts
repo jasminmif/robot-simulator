@@ -7,7 +7,7 @@ export class AppPage extends BasePage{
   }
 
   getAppName(): Promise<string> {
-    return element(by.id('app-name')).getText() as Promise<string>;
+    return this.getElementById('app-name').getText() as Promise<string>;
   }
 
   enterPlaceRobotInput(value: string) {

@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { PlaceRobotWrapperComponent } from './place-robot-wrapper.component';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 
 describe('PlaceRobotWrapperComponent', () => {
   let component: PlaceRobotWrapperComponent;
@@ -8,7 +10,8 @@ describe('PlaceRobotWrapperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlaceRobotWrapperComponent ]
+      declarations: [ PlaceRobotWrapperComponent, ButtonComponent],
+      imports: [ FormsModule ],
     })
     .compileComponents();
   }));

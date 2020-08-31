@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
@@ -15,8 +15,9 @@ import { PlaceRobotWrapperComponent } from './components/place-robot-wrapper/pla
 
 @NgModule({
   declarations: [AppComponent, ButtonComponent, DividerComponent, GridComponent, CellComponent, NotificationComponent, ContainerComponent, CommandsWrapperComponent, PlaceRobotWrapperComponent],
-  imports: [CommonModule, BrowserModule, FormsModule],
+  imports: [FormsModule, CommonModule, BrowserModule],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule {}

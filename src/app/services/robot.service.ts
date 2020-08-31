@@ -22,7 +22,9 @@ export class RobotService {
 
   public place(x: number, y: number, direction: Direction = Direction.N): void {
     if (x >= gridWith || y >= gridHeight) {
-      throw new Error(`X should be less than ${gridWith} and Y should be less than ${gridHeight}`)
+      throw new Error(
+        `X should be less than ${gridWith} and Y should be less than ${gridHeight}`
+      );
     }
 
     if (x < 0 || y < 0) {
@@ -83,28 +85,28 @@ export class RobotService {
   }
 
   private getErrorMoveMsg(direction) {
-    return `Cant move any further ${direction}`;
+    return `Can not move any further ${direction}`;
   }
 
   public move() {
     this.throwIfGameNotStarted();
 
     const currentDirection = this.direction.value;
-    const yPosition = this.yPosition.value;
-    const xPosition = this.xPosition.value;
+    let yPosition = this.yPosition.value;
+    let xPosition = this.xPosition.value;
 
     if (currentDirection === Direction.N) {
       if (yPosition === gridHeight - 1) {
         throw new Error(this.getErrorMoveMsg('North'));
       }
-      this.setYPosition(yPosition + 1);
+      this.setYPosition(++yPosition);
     }
 
     if (currentDirection === Direction.S) {
       if (yPosition === 0) {
         throw new Error(this.getErrorMoveMsg('South'));
       }
-      this.setYPosition(yPosition - 1);
+      this.setYPosition(--yPosition);
     }
 
     if (currentDirection === Direction.W) {
@@ -112,14 +114,14 @@ export class RobotService {
         throw new Error(this.getErrorMoveMsg('West'));
       }
 
-      this.setXPosition(xPosition - 1);
+      this.setXPosition(--xPosition);
     }
 
     if (currentDirection === Direction.E) {
       if (xPosition === gridWith - 1) {
         throw new Error(this.getErrorMoveMsg('East'));
       }
-      this.setXPosition(xPosition + 1);
+      this.setXPosition(++xPosition);
     }
   }
 
@@ -142,6 +144,6 @@ export class RobotService {
   public getCurrentPosition() {
     this.throwIfGameNotStarted();
 
-    return `X: ${this.xPosition.value} | Y: ${this.yPosition.value} | Direction: ${Direction[this.direction.value]}`
+    return `X: ${this.xPosition.value} | Y: ${this.yPosition.value} | Direction: ${Direction[this.direction.value]}`;
   }
 }
