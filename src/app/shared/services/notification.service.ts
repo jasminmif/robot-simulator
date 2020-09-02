@@ -9,6 +9,8 @@ export class NotificationService {
   private message = new BehaviorSubject<string | null>('');
   private notDurationInMilliseconds: number = 5000; // 5 Secs
 
+  private timer: ReturnType<typeof setTimeout>;
+
   public show(message: string) {
     this.setMessage(message);
     this.toggleVisibleNotification();
@@ -19,6 +21,7 @@ export class NotificationService {
   public hide() {
     this.isVisible.next(false);
     this.setMessage('');
+    this._clearTimeout();
   }
 
   public getIsVisible() {
@@ -37,9 +40,16 @@ export class NotificationService {
     this.isVisible.next(!this.isVisible.value);
   }
 
+  private _clearTimeout() {
+    clearTimeout(this.timer);
+  }
+
   private autoHideNotificationAfterSecs() {
-    setTimeout(() => {
+    this._clearTimeout();
+
+    this.timer = setTimeout(() => {
       this.hide();
     }, this.notDurationInMilliseconds);
+
   }
 }
